@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>取消请求</title>
+</head>
+
+<body>
+    <button>发送请求</button>
+    <button>点击取消</button>
+    <script>
+        //获取元素对象
+        const btns = document.querySelectorAll('button');
+        let xhr = null;
+
+        btns[0].onclick = function() {
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://127.0.0.1:8000/delay');
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        console.log(xhr.response);
+                    }
+                }
+            }
+        }
+        btns[1].onclick = function() {
+            //取消请求发送
+            xhr.abort();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+
+<body>
+    <h1>同源策略</h1>
+    <button>点击获取用户数据</button>
+    <script>
+        const btn = document.querySelector('button');
+
+        btn.onclick = function() {
+            //创建对象
+            const xhr = new XMLHttpRequest();
+
+            //初始化 设置类型和URL
+            //这里因为满足同源策略，所以 URL 可以简写
+            xhr.open("GET", "/data");
+
+            //发送请求
+            xhr.send();
+
+            //事件绑定
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        console.log(xhr.response);
+                    }
+                }
+            }
+
+        }
+    </script>
+</body>
+
+</html>
